@@ -1,2 +1,2 @@
 # laravel-react-starter-kit
-A tarter kit to begin with laravel and react
+A starter kit to begin with laravel and react

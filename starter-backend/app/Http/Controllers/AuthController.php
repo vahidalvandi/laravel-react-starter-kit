@@ -9,12 +9,51 @@ use App\Models\User;
 class AuthController extends Controller
 {
     /**
-     * Function to register user
-     *
-     * @param Request $request
-     * @return array
+     * @OA\Post(
+     *     path="/register",
+     *     summary="Register a new user",
+     *     description="Registers a new user in the system",
+     *     tags={"Authentication"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"name", "email", "password"},
+     *             @OA\Property(property="name", type="string", example="John Doe"),
+     *             @OA\Property(property="email", type="string", format="email", example="john@example.com"),
+     *             @OA\Property(property="password", type="string", format="password", example="password"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="User registered successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="status", type="string", example="success"),
+     *             @OA\Property(property="message", type="string", example="successfully Registered"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Validation error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="The given data was invalid."),
+     *             @OA\Property(property="errors", type="object")
+     *         )
+     *     )
+     * )
+     * @OA\Info(
+     *      title="Your API Title",
+     *      version="1.0.0",
+     *      description="Your API Description",
+     *      @OA\Contact(
+     *          email="your-email@example.com"
+     *      ),
+     *      @OA\License(
+     *          name="MIT License",
+     *          url="https://opensource.org/licenses/MIT"
+     *      )
+     *  )
      */
-    public function register(Request $request)
+    public function register(Request $request): \Illuminate\Http\JsonResponse
     {
         $user = User::create([
             'name' => $request->name,
@@ -62,7 +101,7 @@ class AuthController extends Controller
     }
 
     /**
-     * refresh token 
+     * refresh token
      *
      * @param Request $request
      * @return array

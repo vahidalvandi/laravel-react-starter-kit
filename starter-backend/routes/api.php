@@ -11,5 +11,5 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/refresh-token', [AuthController::class, 'refreshToken']);
 
 //=== Secured Routes ===//
-Route::get('/user', [UserController::class, 'getUser'])->middleware(['auth:api', 'verified']);
+Route::get('/user', [UserController::class, 'getUser'])->middleware('auth:api');
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:api');

@@ -30,28 +30,8 @@ class AuthController extends Controller
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="successfully Registered"),
      *         )
-     *     ),
-     *     @OA\Response(
-     *         response=422,
-     *         description="Validation error",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="The given data was invalid."),
-     *             @OA\Property(property="errors", type="object")
-     *         )
      *     )
      * )
-     * @OA\Info(
-     *      title="Your API Title",
-     *      version="1.0.0",
-     *      description="Your API Description",
-     *      @OA\Contact(
-     *          email="your-email@example.com"
-     *      ),
-     *      @OA\License(
-     *          name="MIT License",
-     *          url="https://opensource.org/licenses/MIT"
-     *      )
-     *  )
      */
     public function register(Request $request): \Illuminate\Http\JsonResponse
     {
@@ -70,10 +50,47 @@ class AuthController extends Controller
     }
 
     /**
-     * user login and issue access token
-     *
-     * @param Request $request
-     * @return void
+     * @OA\SecurityScheme(
+     *     type="oauth2",
+     *     securityScheme="oauth2",
+     *     @OA\Flow(
+     *         flow="password",
+     *         tokenUrl="/api//login", // Use your login URL here
+     *         scopes={}
+     *     )
+     * )
+     */
+
+    /**
+     * @OA\Post(
+     *     path="/api/login",
+     *     operationId="login",
+     *     tags={"Authentication"},
+     *     summary="Login to the application and obtain access token",
+     *     security={},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"email", "password"},
+     *             @OA\Property(property="email", type="string", format="email", example="user@example.com"),
+     *             @OA\Property(property="password", type="string", format="password", example="secret")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful login",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="token", type="string", example="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     )
+     * )
      */
     public function login(Request $request)
     {

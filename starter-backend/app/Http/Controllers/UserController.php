@@ -13,6 +13,37 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
+     * 
+     * @OA\Get(
+     *     path="/api/user",
+     *     operationId="getUser",
+     *     tags={"User"},
+     *     summary="Get authenticated user's data",
+     *     security={{"oauth2": {}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             @OA\Schema(
+     *                 schema="User",
+     *                 title="User",
+     *                 required={"id", "name", "email"}, 
+     *                 @OA\Property(property="id", type="integer", format="int64", example=1),
+     *                 @OA\Property(property="name", type="string", example="John Doe"),
+     *                 @OA\Property(property="email", type="string", format="email", example="john@example.com"),
+     *                 @OA\Property(property="created_at", type="string", format="date-time", example="2024-05-02 12:00:00"),
+     *                 @OA\Property(property="updated_at", type="string", format="date-time", example="2024-05-02 12:00:00"),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthenticated",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthenticated")
+     *         )
+     *     )
+     * )
      */
     public function getUser(Request $request)
     {

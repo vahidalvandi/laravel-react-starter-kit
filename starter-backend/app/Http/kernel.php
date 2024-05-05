@@ -3,7 +3,7 @@ namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
-class kernal extends HttpKernel
+class kernel extends HttpKernel
 {
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
@@ -25,6 +25,6 @@ class kernal extends HttpKernel
     ];
 
     protected $routeMiddleware = [
-        'verified' => \App\Http\Middleware\VerifyEmail::class,
+//       'verified' => \App\Http\Middleware\VerifyEmail::class,
     ];
 }

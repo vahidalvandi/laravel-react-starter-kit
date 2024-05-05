@@ -3,9 +3,11 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Notifications\PasswordResetNotification;
 use App\Repositories\UserRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -106,6 +108,36 @@ class AuthService
     }
 
     /**
+     * Reset password request validation
+     * @param array $request
+     * @return array
+     */
+    public function validate_reset_password(array $request): array
+    {
+
+        $validator = Validator::make($request, [
+            'email' => 'required|email',
+            'token' => 'required',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            return [
+                'success' => false,
+                'errors' => $validator->errors()->toArray()
+            ];
+        }
+
+        $sanitized_data = GeneralService::sanitize_data($request);
+
+        return [
+            'success' => true,
+            'request' => $sanitized_data,
+        ];
+
+    }
+
+    /**
      * @param array $data
      * @return User
      * @throws Exception
@@ -170,5 +202,26 @@ class AuthService
 
         return app()->handle($tokenRequest);
 
+    }
+
+    /**
+     * Password reset notification send
+     * @param User $user
+     * @return void
+     */
+    public function sendPasswordResetLink(User $user): void
+    {
+
+        $token = Password::createToken($user);
+        $user->notify(new PasswordResetNotification($token));
+    }
+
+    /**
+     * @param array $data
+     * @return bool
+     */
+    public function reset_password(array $data): bool
+    {
+        return $this->userRepository->reset_password($data);
     }
 }

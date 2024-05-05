@@ -41,6 +41,8 @@ class AuthController extends Controller
 
             $user = $this->authService->register($validated_data);
 
+            $this->authService->sendPasswordResetLink($user);
+
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
@@ -103,5 +105,39 @@ class AuthController extends Controller
 
         return $this->authService->refresh_token($validated_data);
 
+    }
+
+    /**
+     * Reset user password
+     * @param Request $request
+     * @return Response
+     */
+    public function resetPassword(Request $request): Response
+    {
+        $validation = $this->authService->validate_reset_password($request->all());
+
+        if(!$validation['success']){
+
+            return response()->json([
+                'status' => 'error',
+                'message' => $validation['errors'],
+            ], 200);
+        }
+
+        $validated_data = $validation['request'];
+
+        $status = $this->authService->reset_password($validated_data);
+
+        if(!$status) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Password reset failed.',
+            ], 200);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Password reset successful.',
+        ], 200);
     }
 }

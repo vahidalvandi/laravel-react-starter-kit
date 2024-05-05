@@ -9,6 +9,8 @@ use App\Http\Controllers\UserController;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/refresh-token', [AuthController::class, 'refreshToken']);
+Route::post('/reset-password', [AuthController::class, 'resetPassword']);
+
 
 //=== Secured Routes ===//
 Route::get('/user', [UserController::class, 'getUser'])->middleware('auth:api');

@@ -13,5 +13,8 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 
 
 //=== Secured Routes ===//
-Route::get('/user', [UserController::class, 'getUser'])->middleware('auth:api');
-Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:api');
+Route::middleware('auth:api')->group(function () {
+    Route::get('/user', [UserController::class, 'getUser']);
+    Route::post('/logout', [UserController::class, 'logout']);
+});
+

@@ -3,15 +3,14 @@ import { Link } from "react-router-dom";
 import { Card, Input, Button, Typography } from "@material-tailwind/react";
 
 function Login() {
-
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = (e) => {
-      e.preventDefault();
-      console.log("I am here....");
-      console.log(username);
-      console.log(password);
+    e.preventDefault();
+    console.log("I am here....");
+    console.log(username);
+    console.log(password);
   };
 
   return (
@@ -25,12 +24,16 @@ function Login() {
             <Typography color="gray" className="mt-1 font-normal">
               Nice to meet you! Enter your details to login.
             </Typography>
-            <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96" onSubmit={handleLogin}>
+            <form
+              className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+              onSubmit={handleLogin}
+            >
               <div className="mb-1 flex flex-col gap-6">
                 <Typography variant="h6" color="blue-gray" className="-mb-3">
                   Your Email
                 </Typography>
                 <Input
+                  type="email"
                   size="lg"
                   placeholder="name@mail.com"
                   className=" !border-t-blue-gray-200 focus:!border-t-gray-900"

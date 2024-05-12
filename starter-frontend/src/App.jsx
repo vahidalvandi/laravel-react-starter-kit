@@ -1,17 +1,15 @@
-import { useState } from 'react'
+import { useState } from "react";
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routers from "./routes/Routes.jsx";
 
 function App() {
-
   return (
     <>
-      <div>
-        <h1 className="text-3xl font-bold underline">
-          Hello world!
-        </h1>
-      </div>
-
+      <Router>
+        <Routers />
+      </Router>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

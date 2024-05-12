@@ -1,16 +1,27 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, Input, Button, Typography } from "@material-tailwind/react";
+import { useDispatch } from "react-redux";
+import { request_login } from "../../store/Auth/actions";
 
 function LoginForm() {
+  const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
+
     console.log("I am here....");
     console.log(username);
     console.log(password);
+
+    const payload = {
+        email: username,
+        password: password,
+    };
+
+    dispatch(request_login(payload));
   };
 
   return (

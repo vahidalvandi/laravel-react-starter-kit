@@ -1,6 +1,4 @@
-import { SET_USER } from "./actions";
-import { SET_LOGGED_IN_STATUS } from "./actions";
-import { SET_LOADING_STATUS } from "./actions";
+import { SET_USER, SET_LOGGED_IN_STATUS, SET_LOADING_STATUS } from "./actions";
 
 const initialState = {
   user: {},

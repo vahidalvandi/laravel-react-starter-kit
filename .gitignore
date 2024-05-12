@@ -21,3 +21,16 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
+.idea/codeception.xml
+.idea/php-test-framework.xml
+.idea/php.xml
+.idea/phpspec.xml
+.idea/phpunit.xml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/shelf/Uncommitted_changes_before_Update_at_5_5_2024_11_00_AM__Changes_.xml
+.idea/shelf/Uncommitted_changes_before_Update_at_5_5_2024_11_00_AM_[Changes]/shelved.patch
+.idea/shelf/Uncommitted_changes_before_Update_at_5_5_2024_11_00_AM_[Changes]/shelved.patch
+.idea/shelf/Uncommitted_changes_before_Update_at_5_5_2024_11_00_AM_[Changes]/shelved.patch
+starter-frontend/package-lock.json

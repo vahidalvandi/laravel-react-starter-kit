@@ -49,6 +49,10 @@ Generate passport keys
 php artisan passport:keys
 ```
 
+generate persoal  CLIENT_ID , CLIENT_SECRET
+`php artisan passport:client --personal`
+
+
 Update your passport personal access client id and client secret.
 ```
 PASSPORT_PERSONAL_ACCESS_CLIENT_ID=.........
